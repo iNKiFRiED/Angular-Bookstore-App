@@ -20,6 +20,8 @@ export class BookstoreContainerComponent implements OnInit, OnDestroy {
     booksSubscription: Subscription;
 
     books: Book[] = [];
+    authors: string[];
+    publishers: string[];
     collectionState: UICollectionState;
 
     constructor(
@@ -34,6 +36,8 @@ export class BookstoreContainerComponent implements OnInit, OnDestroy {
             .pipe(
                 map(x => {
                     this.books = x.books;
+                    this.authors = [...new Set(x.books.map(item => item.authors.join(', ')))];
+                    this.publishers = [...new Set(x.books.map(item => item.publisher))];
                     this.collectionState = x.uiCollectionState;
                 })
             )

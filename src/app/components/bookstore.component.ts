@@ -11,12 +11,24 @@ import { UICollectionState } from '../models/UICollectionState';
 export class BookstoreComponent implements OnInit {
 
   @Input() books: Book[];
+  @Input() authors: string[];
+  @Input() publishers: string[];
   @Input() cs: UICollectionState;
 
-  searchQuery: string;
+  searchQuery = '';
+  filterAuthorQuery = '';
+  filterPublisherQuery = '';
 
   constructor() { }
 
   ngOnInit() { }
+
+  onSelectAuthor(event){
+    this.filterAuthorQuery = event.target.value.toLowerCase();
+  }
+
+  onSelectPublisher(event){
+    this.filterPublisherQuery = event.target.value.toLowerCase();
+  }
 
 }
