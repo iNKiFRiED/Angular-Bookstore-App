@@ -16,7 +16,7 @@ import { NotFoundComponent as NotFoundPage } from '../shared/not-found';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/',
+    redirectTo: '/books',
     pathMatch: 'full'
   },
   {
