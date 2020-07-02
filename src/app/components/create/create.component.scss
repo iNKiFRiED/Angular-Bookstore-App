@@ -1,0 +1,37 @@
+#breadcrumbs {
+    margin-bottom: 30px;
+}
+
+.input-group-addon {
+    min-width: 150px;
+}
+
+.input-group-addon,
+.input-group-addon-postfix {
+    font-weight: 500;
+    text-align: left;
+}
+
+.input-group-addon-postfix {
+    min-width: auto;
+}
+
+.alert-danger {
+    padding: 5px 12px;
+    text-align: center;
+}
+
+.btn-large {
+    background: transparent;
+    border: 2px solid indianred;
+    color: indianred;
+    font-weight: 700;
+    letter-spacing: -.8px;
+    margin-top: 40px;
+    padding: 10px 40px;
+    text-transform: uppercase;
+    &:hover {
+        background-color: indianred;
+        color: white;
+    }
+}

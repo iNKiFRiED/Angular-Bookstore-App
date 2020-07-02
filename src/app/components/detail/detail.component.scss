@@ -1,0 +1,73 @@
+#breadcrumbs {
+    margin-bottom: 30px;
+}
+
+#related-books {
+    border-top: 2px solid indianred;
+    margin-top: 30px;
+    h4 {
+        margin-top: 30px;
+        margin-bottom: 25px;
+    }
+}
+
+.author-info {
+    padding: 8px 10px;
+    margin-bottom: 15px;
+}
+
+.label {
+    margin-right: 5px;
+}
+
+.btn-group {
+    margin-top: 60px;
+    .btn-large {
+        background: transparent;
+        border: 2px solid indianred;
+        color: indianred;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -.8px;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        &:hover {
+            background-color: indianred;
+            color: white;
+            .glyphicon {
+                color: white;
+            }
+        }
+    }
+}
+
+#book-cover {
+    background-color: #e8e8e8;
+    background-image: url('/assets/placeholder.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 1px solid #777;
+    box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
+}
+
+.thumbnail {
+    background-color: transparent;
+    min-height: 400px;
+    img {
+        background-color: #e8e8e8;
+        background-image: url('/assets/placeholder.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        border: 1px solid #777;
+        box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
+    };
+	.caption {
+		h5 {
+			font-weight: 600;
+        }
+        p {
+            font-size: 12px;
+            margin-bottom: 2px;
+        }
+	}
+}

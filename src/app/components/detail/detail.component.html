@@ -1,0 +1,67 @@
+<div class="row" id="breadcrumbs">
+    <div class="col-md-12">
+        <a [routerLink]="['/books']"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back to overview</a>
+    </div>
+</div>
+
+<app-loader *ngIf="cs.loading"></app-loader>
+
+<div class="alert alert-error" *ngIf="cs.error">
+    Could not retrieve book. Please try again later.
+</div>
+
+<div class="row" *ngIf="cs.success && book">
+    <div class="col-md-12">
+        <div class="col-sm-5 col-sm-offset-1">
+            <img id="book-cover" class="img-responsive" [src]="book.coverLarge" [alt]="book.title" *ngIf="book.isbn13 !== '9781491904244'">
+            <img id="book-cover" class="img-responsive" src="/assets/placeholder.png" [alt]="book.title" *ngIf="book.isbn13 === '9781491904244'">
+            <p class="author-info"><b>Author(s):</b> {{book.authors.join(', ')}}</p>
+        </div>
+        <div class="col-sm-5">
+            <h4 class="media-heading">{{book.title}}</h4>
+            <h5>{{book.subtitle}}</h5>
+            <p>{{book.description}}</p>
+            <ul>
+                <li><b>Publisher:</b> {{book.publisher}}</li>
+                <li><b>Number of pages:</b> {{book.pages}}</li>
+                <li><b>Year of publication:</b> {{book.published | date:'yyyy'}}</li>
+                <li><b>ISBN (10):</b> {{book.isbn10}}</li>
+                <li><b>ISBN (13):</b> {{book.isbn13}}</li>
+                <li *ngIf="book.website"><b>Website:</b> &nbsp;<a [href]="book.website" target="_blank">{{book.website}}</a></li>
+            </ul>
+            <span *ngFor="let cat of book.categories; index as i" class="label label-primary">{{cat}}</span>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button class="btn btn-primary btn-large">
+                            <span class="glyphicon glyphicon-heart"></span> Wishlist
+                        </button>
+                        <button class="btn btn-primary btn-large">
+                            <span class="glyphicon glyphicon-shopping-cart"></span> Buy this book
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="related-books" *ngIf="cs.success && otherBooks">
+    <div class="col-md-10 col-md-offset-1">
+        <h4 class="text-center">Other books that might interest you:</h4>
+        <div class="row">
+            <div class="col-sm-5 col-md-3" *ngFor="let book of otherBooks">
+                <div class="thumbnail">
+                    <a [routerLink]="['/books/detail/', book.isbn13]">
+                        <img [src]="book.cover" [alt]="book.title" *ngIf="book.isbn13 !== '9781491904244'">
+                        <img src="/assets/placeholder.png" [alt]="book.title" *ngIf="book.isbn13 === '9781491904244'">
+                    </a>
+                    <div class="caption">
+                        <h5><a [routerLink]="['/books/detail/', book.isbn13]">{{book.title}}</a></h5>
+                        <p>by <b>{{book.authors.join(', ')}}</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

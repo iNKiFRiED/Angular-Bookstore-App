@@ -1,0 +1,41 @@
+body {
+	background-image: url("./assets/pattern.png");
+	font-family: 'Open Sans', sans-serif;
+	margin-top: 15px;
+}
+
+.navbar {
+	box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
+	.navbar-brand {
+		font-size: 22px;
+		font-weight: 800;
+		letter-spacing: -1px;
+		text-transform: uppercase;
+		span {
+			color: indianred;
+		}
+	}
+	.navbar-nav {
+		li {
+			&:hover {
+				background-color: indianred;
+				a {
+					color: white;
+				}
+			}
+			a {
+				font-weight: 800;
+				letter-spacing: -.5px;
+				text-transform: uppercase;
+			}
+		}
+	}
+}
+
+.glyphicon {
+	color: indianred;
+}
+
+a {
+	color: indianred;
+}

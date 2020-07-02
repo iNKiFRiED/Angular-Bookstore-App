@@ -1,0 +1,224 @@
+<div class="row" id="breadcrumbs">
+    <div class="col-md-12">
+        <a [routerLink]="['/books']"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back to overview</a>
+    </div>
+    <div class="col-md-12">
+        <h3 class="text-center">Add a new book to the store</h3>
+    </div>
+</div>
+
+<div class="row">
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" id="book-form">
+        <div class="col-sm-5 col-sm-offset-1">
+            <div class="form-group">
+                <label class="sr-only">Book title</label>
+                <div class="input-group">
+                    <div class="input-group-addon">Book title</div>
+                    <input type="text" class="form-control" formControlName="title" required>
+                </div>
+                <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">
+                    <div *ngIf="title.errors.required">
+                        Book title is required.
+                    </div>
+                    <div *ngIf="title.errors.minlength">
+                        Book title must be at least 10 characters long.
+                    </div>
+                    <div *ngIf="title.errors.maxlength">
+                        Book title must not exceed 120 characters.
+                    </div>
+                    <div *ngIf="title.errors.forbiddenName">
+                        Please check the title for invalid characters.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="sr-only">Book subtitle</label>
+                <div class="input-group">
+                    <div class="input-group-addon">Book subtitle</div>
+                    <input type="text" class="form-control" formControlName="subtitle" required>
+                </div>
+                <div *ngIf="subtitle.invalid && (subtitle.dirty || subtitle.touched)" class="alert alert-danger">
+                    <div *ngIf="subtitle.errors.required">
+                        Book subtitle is required.
+                    </div>
+                    <div *ngIf="subtitle.errors.minlength">
+                        Book title must be at least 10 characters long.
+                    </div>
+                    <div *ngIf="subtitle.errors.maxlength">
+                        Book title must not exceed 120 characters.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="sr-only">Description</label>
+                <div class="input-group">
+                    <div class="input-group-addon">Description</div>
+                    <textarea type="text" class="form-control" formControlName="description" required></textarea>
+                </div>
+                <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="description.errors.required">
+                        Description is required.
+                    </div>
+                    <div *ngIf="description.errors.maxlength">
+                        Description must not exceed 512 characters.
+                    </div>
+                    <div *ngIf="description.errors.pattern">
+                        Please make sure the first letter is capital.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="sr-only">Author(s)</label>
+                <div class="form-group" formArrayName="authors">
+                    <div *ngFor="let author of authors.controls; let i=index">
+                        <div class="input-group">
+                            <div class="input-group-addon">Author name</div>
+                            <input type="text" class="form-control" [formControlName]="i" required>
+                            <div class="input-group-addon input-group-addon-postfix" *ngIf="authors.controls.length < 3 && i === 0">
+                                <span class="glyphicon glyphicon-plus-sign" (click)="addAuthor()"></span>
+                            </div>
+                            <div class="input-group-addon input-group-addon-postfix" *ngIf="authors.controls.length > 1 && i !== 0">
+                                <span class="glyphicon glyphicon-remove" (click)="removeAuthor(i)"></span>
+                            </div>
+                        </div>
+                        <div *ngIf="authors.controls[i].invalid && (authors.controls[i].dirty || authors.controls[i].touched)" class="alert alert-danger">
+                            <div *ngIf="authors.controls[i].errors.required">
+                                Author is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="sr-only">Publisher</label>
+                <div class="input-group">
+                    <div class="input-group-addon">Publisher</div>
+                    <input type="text" class="form-control" formControlName="publisher" required>
+                </div>
+                <div *ngIf="publisher.invalid && (publisher.dirty || publisher.touched)" class="alert alert-danger">
+                    <div *ngIf="publisher.errors.required">
+                        Publisher is required.
+                    </div>
+                    <div *ngIf="publisher.errors.minlength">
+                        Pulbisher must be at least 5 characters.
+                    </div>
+                    <div *ngIf="publisher.errors.maxlength">
+                        Publisher cannot exceed 60 characters.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="form-group">
+                <label class="sr-only">Year of publication</label>
+                <div class="input-group">
+                    <div class="input-group-addon">Year of publication</div>
+                    <input type="text" class="form-control" formControlName="published" required>
+                </div>
+                <div *ngIf="published.invalid && (published.dirty || published.touched)" class="alert alert-danger">
+                    <div *ngIf="published.errors.required">
+                        Year of publication is required.
+                    </div>
+                    <div *ngIf="published.errors.minlength">
+                        Please use 4-digit year format, ie 2020.
+                    </div>
+                    <div *ngIf="published.errors.maxlength">
+                        Please use 4-digit year format, ie 2020.
+                    </div>
+                    <div *ngIf="published.errors.pattern">
+                        Please use only numbers 0-9.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="sr-only">Number of pages</label>
+                <div class="input-group">
+                    <div class="input-group-addon">Number of pages</div>
+                    <input type="text" class="form-control" formControlName="pages" required>
+                </div>
+                <div *ngIf="pages.invalid && (pages.dirty || pages.touched)" class="alert alert-danger">
+                    <div *ngIf="pages.errors.required">
+                        Pages is required.
+                    </div>
+                    <div *ngIf="pages.errors.minlength">
+                        A book must have more than those pages.
+                    </div>
+                    <div *ngIf="pages.errors.maxlength">
+                        A book cannot have more than 9999 pages.
+                    </div>
+                    <div *ngIf="pages.errors.pattern">
+                        Please use only numbers 0-9.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="sr-only">Categories</label>
+                <div class="form-group" formArrayName="categories">
+                    <div *ngFor="let cat of categories.controls; let i=index">
+                        <div class="input-group">
+                            <div class="input-group-addon">Category name</div>
+                            <input type="text" class="form-control" [formControlName]="i" required>
+                            <div class="input-group-addon input-group-addon-postfix" *ngIf="categories.controls.length < 4 && i === 0">
+                                <span class="glyphicon glyphicon-plus-sign" (click)="addCategory()"></span>
+                            </div>
+                            <div class="input-group-addon input-group-addon-postfix" *ngIf="categories.controls.length > 1 && i !== 0">
+                                <span class="glyphicon glyphicon-remove" (click)="removeCategory(i)"></span>
+                            </div>
+                        </div>
+                        <div *ngIf="categories.controls[i].invalid && (categories.controls[i].dirty || categories.controls[i].touched)" class="alert alert-danger">
+                            <div *ngIf="categories.controls[i].errors.required">
+                                Category is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="sr-only">ISBN (10-digit)</label>
+                <div class="input-group">
+                    <div class="input-group-addon">ISBN (10-digit)</div>
+                    <input type="text" class="form-control" formControlName="isbn10" required>
+                </div>
+                <div *ngIf="isbn10.invalid && (isbn10.dirty || isbn10.touched)" class="alert alert-danger">
+                    <div *ngIf="isbn10.errors.required">
+                        ISBN is required.
+                    </div>
+                    <div *ngIf="isbn10.errors.minlength">
+                        ISBN must be exaclty 10 numbers.
+                    </div>
+                    <div *ngIf="isbn10.errors.maxlength">
+                        ISBN must be exaclty 10 numbers.
+                    </div>
+                    <div *ngIf="isbn10.errors.pattern">
+                        Please use only numbers 0-9.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="sr-only">ISBN (13-digit)</label>
+                <div class="input-group">
+                    <div class="input-group-addon">ISBN (13-digit)</div>
+                    <input type="text" class="form-control" formControlName="isbn13" required>
+                </div>
+                <div *ngIf="isbn13.invalid && (isbn13.dirty || isbn13.touched)" class="alert alert-danger">
+                    <div *ngIf="isbn13.errors.required">
+                        ISBN is required.
+                    </div>
+                    <div *ngIf="isbn13.errors.minlength">
+                        ISBN must be exaclty 13 numbers.
+                    </div>
+                    <div *ngIf="isbn13.errors.maxlength">
+                        ISBN must be exaclty 13 numbers.
+                    </div>
+                    <div *ngIf="isbn13.errors.pattern">
+                        Please use only numbers 0-9.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 text-center">
+            <button class="btn btn-primary btn-large" type="submit" [disabled]="!bookForm.valid">Add book</button>
+        </div>
+    </form>
+</div>
